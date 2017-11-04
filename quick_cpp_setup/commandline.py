@@ -13,5 +13,6 @@ class ArgumentParser(object):
         parser.add_argument('--without_googletest', action='store_true')
         parser.add_argument('--without_clang_format', action='store_true')
         parser.add_argument('--without_yapf', action='store_true')
+        parser.add_argument('--googletest_path', default='googletest')
         configuration = parser.parse_args(argv)
         return configuration

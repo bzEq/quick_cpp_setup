@@ -47,13 +47,13 @@ cc_library(
 )
 """
 
-WORKSPACE = """\
+WORKSPACE = string.Template("""\
 new_local_repository(
     name="gtest",
     build_file="gtest.BUILD",
-    path="googletest",
+    path="$googletest_path",
 )
-"""
+""")
 
 CLANG_FORMAT = """\
 BasedOnStyle: LLVM
@@ -83,7 +83,9 @@ class Builder(object):
 
     def add_googletest(self):
         with open(os.path.join(self.project_root, "WORKSPACE"), "w") as f:
-            f.write(WORKSPACE)
+            f.write(
+                WORKSPACE.safe_substitute(
+                    googletest_path=self.configuration.googletest_path))
         with open(os.path.join(self.project_root, "gtest.BUILD"), "w") as f:
             f.write(gtest_BUILD)
         return True
