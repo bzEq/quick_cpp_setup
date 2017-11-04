@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import logging
+
+from quick_cpp_setup.commandline import ArgumentParser
+from quick_cpp_setup.layout import Builder
+
+
+def main():
+    configuration = ArgumentParser.get_configuration(sys.argv[1:])
+    builder = Builder(configuration)
+    if builder.build():
+        return 0
+    return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())
