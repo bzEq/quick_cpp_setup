@@ -58,6 +58,7 @@ new_local_repository(
 CLANG_FORMAT = """\
 BasedOnStyle: LLVM
 SortIncludes: true
+AlwaysBreakTemplateDeclarations: true
 """
 
 YAPF = """\
