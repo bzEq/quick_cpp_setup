@@ -51,7 +51,7 @@ cc_library(
 WORKSPACE = string.Template("""\
 new_local_repository(
     name="gtest",
-    build_file="gtest.BUILD",
+    build_file="third_party/gtest.BUILD",
     path="$googletest_path",
 )
 """)
@@ -107,6 +107,7 @@ class Builder(object):
         "lib",
         "tools",
         "unittests",
+        "third_party",
     ]
 
     def __init__(self, configuration):
@@ -119,7 +120,9 @@ class Builder(object):
             f.write(
                 WORKSPACE.safe_substitute(
                     googletest_path=self.configuration.googletest_path))
-        with open(os.path.join(self.project_root, "gtest.BUILD"), "w") as f:
+        with open(
+                os.path.join(self.project_root, "third_party/gtest.BUILD"),
+                "w") as f:
             f.write(gtest_BUILD)
         return True
 
